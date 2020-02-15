@@ -111,7 +111,7 @@
                                     <action selector="btnChooseImageOnClick:" destination="pqV-Q7-LKH" eventType="touchUpInside" id="0qi-U2-nxD"/>
                                 </connections>
                             </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fruit_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="1u0-5g-WWS">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fruit_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="1u0-5g-WWS">
                                 <rect key="frame" x="83" y="145" width="248" height="200"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <constraints>

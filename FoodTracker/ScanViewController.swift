@@ -8,6 +8,7 @@
 
 import SwiftUI
 import UIKit
+import Vision
 
 class ScanViewController: UIViewController{
     
@@ -16,6 +17,34 @@ class ScanViewController: UIViewController{
     
     @IBOutlet weak var btnChooseImage: UIButton!
     
+    let barcodeRequest = VNDetectBarcodesRequest(completionHandler: { request, error in
+
+        guard let results = request.results else { return }
+
+        // Loopm through the found results
+        for result in results {
+            
+            // Cast the result to a barcode-observation
+            
+            if let barcode = result as? VNBarcodeObservation {
+                
+                // Print barcode-values
+                print("Symbology: \(barcode.symbology.rawValue)")
+                if let payload = barcode.payloadStringValue {
+                    print("payload is \(payload)")
+                }
+                //currently useless
+                /*if let desc = barcode.barcodeDescriptor as? CIQRCodeDescriptor {
+                    let content = String(data: desc.errorCorrectedPayload, encoding: .utf8)
+                    
+                    // FIXME: This currently returns nil. I did not find any docs on how to encode the data properly so far.
+                    print("Payload: \(String(describing: content))")
+                    print("Error-Correction-Level: \(desc.errorCorrectionLevel)")
+                    print("Symbol-Version: \(desc.symbolVersion)")
+                }*/
+            }
+        }
+    })
     
     var imagePicker = UIImagePickerController()
     
@@ -58,6 +87,7 @@ class ScanViewController: UIViewController{
         }
         
         self.present(alert, animated: true, completion: nil)
+        
     }
     
     //MARK: - Open the camera
@@ -98,6 +128,13 @@ extension ScanViewController:  UIImagePickerControllerDelegate, UINavigationCont
          */
         if let editedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage{
             self.imgProfile.image = editedImage
+            guard let image = editedImage.cgImage else { return }
+            let handler = VNImageRequestHandler(cgImage: image, options: [:])
+
+            // Perform the barcode-request. This will call the completion-handler of the barcode-request.
+            guard let _ = try? handler.perform([barcodeRequest]) else {
+                return print("Could not perform barcode-request!")
+            }
         }
         
         //Dismiss the UIImagePicker after selection
