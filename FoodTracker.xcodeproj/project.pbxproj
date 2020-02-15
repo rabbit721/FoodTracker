@@ -13,6 +13,9 @@
 		4200E1DE23F7912C00208C79 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4200E1DC23F7912C00208C79 /* Main.storyboard */; };
 		4200E1E023F7913000208C79 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4200E1DF23F7913000208C79 /* Assets.xcassets */; };
 		4200E1E323F7913000208C79 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4200E1E123F7913000208C79 /* LaunchScreen.storyboard */; };
+		4200E1EB23F795FB00208C79 /* MainPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4200E1EA23F795FB00208C79 /* MainPageController.swift */; };
+		4200E1ED23F7981600208C79 /* ScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4200E1EC23F7981600208C79 /* ScanViewController.swift */; };
+		4200E1EF23F79E7500208C79 /* FridgeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4200E1EE23F79E7500208C79 /* FridgeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +27,9 @@
 		4200E1DF23F7913000208C79 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4200E1E223F7913000208C79 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4200E1E423F7913000208C79 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4200E1EA23F795FB00208C79 /* MainPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageController.swift; sourceTree = "<group>"; };
+		4200E1EC23F7981600208C79 /* ScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanViewController.swift; sourceTree = "<group>"; };
+		4200E1EE23F79E7500208C79 /* FridgeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FridgeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +66,9 @@
 				4200E1D823F7912C00208C79 /* SceneDelegate.swift */,
 				4200E1DA23F7912C00208C79 /* ViewController.swift */,
 				4200E1DC23F7912C00208C79 /* Main.storyboard */,
+				4200E1EE23F79E7500208C79 /* FridgeViewController.swift */,
+				4200E1EA23F795FB00208C79 /* MainPageController.swift */,
+				4200E1EC23F7981600208C79 /* ScanViewController.swift */,
 				4200E1DF23F7913000208C79 /* Assets.xcassets */,
 				4200E1E123F7913000208C79 /* LaunchScreen.storyboard */,
 				4200E1E423F7913000208C79 /* Info.plist */,
@@ -139,8 +148,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				4200E1DB23F7912C00208C79 /* ViewController.swift in Sources */,
+				4200E1EB23F795FB00208C79 /* MainPageController.swift in Sources */,
+				4200E1ED23F7981600208C79 /* ScanViewController.swift in Sources */,
 				4200E1D723F7912C00208C79 /* AppDelegate.swift in Sources */,
 				4200E1D923F7912C00208C79 /* SceneDelegate.swift in Sources */,
+				4200E1EF23F79E7500208C79 /* FridgeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
