@@ -90,32 +90,57 @@
             </objects>
             <point key="canvasLocation" x="1842" y="144"/>
         </scene>
-        <!--Scan View Conroller-->
+        <!--Scan View Controller-->
         <scene sceneID="Vf7-Nr-d6q">
             <objects>
-                <viewController id="pqV-Q7-LKH" customClass="ScanViewConroller" customModule="FoodTracker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="pqV-Q7-LKH" customClass="ScanViewController" customModule="FoodTracker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="p8V-50-uLS">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MWe-a5-Edb">
-                                <rect key="frame" x="184" y="414" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VQl-ID-C23">
+                                <rect key="frame" x="107" y="406" width="200" height="40"/>
+                                <color key="backgroundColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="XJi-Di-ndR"/>
+                                    <constraint firstAttribute="width" constant="200" id="l47-nJ-RSO"/>
+                                </constraints>
+                                <color key="tintColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <state key="normal" title="Choose Profile"/>
+                                <connections>
+                                    <action selector="btnChooseImageOnClick:" destination="pqV-Q7-LKH" eventType="touchUpInside" id="0qi-U2-nxD"/>
+                                </connections>
                             </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NDR-83-cBA">
-                                <rect key="frame" x="87" y="128" width="240" height="196"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fruit_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="1u0-5g-WWS">
+                                <rect key="frame" x="83" y="145" width="248" height="200"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="248" id="IV7-bi-oDc"/>
+                                    <constraint firstAttribute="height" constant="200" id="SkT-iA-LPz"/>
+                                </constraints>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="1u0-5g-WWS" firstAttribute="top" secondItem="em2-g9-8ha" secondAttribute="top" constant="145" id="PA9-1E-GnK"/>
+                            <constraint firstItem="VQl-ID-C23" firstAttribute="centerX" secondItem="em2-g9-8ha" secondAttribute="centerX" id="TzO-XA-3Zw"/>
+                            <constraint firstItem="VQl-ID-C23" firstAttribute="top" secondItem="1u0-5g-WWS" secondAttribute="bottom" constant="61" id="sHq-HH-etX"/>
+                            <constraint firstItem="1u0-5g-WWS" firstAttribute="centerX" secondItem="em2-g9-8ha" secondAttribute="centerX" id="whS-jX-adp"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="em2-g9-8ha"/>
                     </view>
                     <navigationItem key="navigationItem" id="JOg-9S-LHL"/>
+                    <connections>
+                        <outlet property="btnChooseImage" destination="VQl-ID-C23" id="gQM-fS-NdB"/>
+                        <outlet property="imgProfile" destination="1u0-5g-WWS" id="PwS-y4-Ify"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D4n-K2-q9S" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1808.6956521739132" y="-620.08928571428567"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="fruit_placeholder" width="338" height="240"/>
+    </resources>
 </document>
