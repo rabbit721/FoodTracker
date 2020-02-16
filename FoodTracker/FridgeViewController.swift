@@ -74,13 +74,12 @@ class FridgeViewController: UITableViewController {
 
     @IBAction func done(segue:UIStoryboardSegue) {
         let itemDetailVC = segue.source as! itemDetailViewController
-        self.newItem.name = itemDetailVC.name
-        self.newItem.date = itemDetailVC.fullDate
-        self.newItem.image = itemDetailVC.image
-        
-        print(items)
+        newItem.name = itemDetailVC.name
+        newItem.date = itemDetailVC.fullDate
+        newItem.image = itemDetailVC.image
             
         items.append(newItem)
+        //print(newItem.name, newItem.date, newItem.image)
         tableView.reloadData()
     }
     

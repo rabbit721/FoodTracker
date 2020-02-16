@@ -15,18 +15,18 @@ class itemDetailViewController: UIViewController {
     var date: String = ""
     var year: String = ""
     var fullDate: String = ""
-    var image: String = ""
+    var image: String = "protein"
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
+    
     @IBOutlet weak var itemName: UITextField!
     @IBOutlet weak var itemMonth: UITextField!
     @IBOutlet weak var itemDate: UITextField!
     @IBOutlet weak var itemYear: UITextField!
-    
     @IBOutlet weak var itemImage: UITextField!
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
