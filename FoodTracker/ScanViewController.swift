@@ -9,19 +9,46 @@
 import SwiftUI
 import UIKit
 import Vision
+import CoreML
 
-class ScanViewController: UIViewController{
+
+class ScanViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     
     @IBOutlet weak var imgProfile: UIImageView!
-
+    @IBOutlet weak var percentage: UITextView!
     
     @IBOutlet weak var btnChooseImage: UIButton!
     
-    let barcodeRequest = VNDetectBarcodesRequest(completionHandler: { request, error in
+    var productCatalog = ProductCatalog()
+    let fruitNames = ["acerolas", "apples", "apricots", "avocados", "bananas", "blackberries", "blueberries", "cantaloupes", "cherries", "coconuts", "figs", "grapefruits", "grapes", "guava", "honneydew_melon", "kiwifruit", "lemons", "limes", "mangos", "nectarine", "olives", "onion", "oranges", "passionfruit", "peaches", "pears", "pineapples", "plums", "pomegranates", "potato", "raspberries", "strawberries", "tomatoes", "watermelons"]
+    var vgg = VGGNorm()
+    
+    
+    func showInfo(for payload: String) {
+        if let product = productCatalog.item(forKey: payload) {
+            print(payload)
+            showAlert(withTitle: product.name ?? "No product name provided", message: payload)
+        } else {
+            showAlert(withTitle: "No item found for this payload", message: "")
+        }
+    }
+    
+    var imagePicker = UIImagePickerController()
+    /*
+    lazy var barcodeRequest = VNDetectBarcodesRequest(completionHandler: { request, error in
 
         guard let results = request.results else { return }
 
         // Loopm through the found results
+        if let bestResult = request.results?.first as? VNBarcodeObservation,
+            let payload = bestResult.payloadStringValue {
+            self.showInfo(for: payload)
+            print(payload)
+        } else {
+            self.showAlert(withTitle: "Unable to extract results",
+                           message: "Cannot extract barcode information from data.")
+        }
+        
         for result in results {
             
             // Cast the result to a barcode-observation
@@ -45,13 +72,12 @@ class ScanViewController: UIViewController{
             }
         }
     })
-    
-    var imagePicker = UIImagePickerController()
-    
+    */
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.imgProfile.layer.borderWidth = 0
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -115,11 +141,11 @@ class ScanViewController: UIViewController{
         imagePicker.delegate = self
         self.present(imagePicker, animated: true, completion: nil)
     }
-}
+
 
 //MARK: - UIImagePickerControllerDelegate
 
-extension ScanViewController:  UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         /*
          Get the image from the info dictionary.
@@ -128,13 +154,7 @@ extension ScanViewController:  UIImagePickerControllerDelegate, UINavigationCont
          */
         if let editedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage{
             self.imgProfile.image = editedImage
-            guard let image = editedImage.cgImage else { return }
-            let handler = VNImageRequestHandler(cgImage: image, options: [:])
-
-            // Perform the barcode-request. This will call the completion-handler of the barcode-request.
-            guard let _ = try? handler.perform([barcodeRequest]) else {
-                return print("Could not perform barcode-request!")
-            }
+            processImage(editedImage)
         }
         
         //Dismiss the UIImagePicker after selection
@@ -145,5 +165,48 @@ extension ScanViewController:  UIImagePickerControllerDelegate, UINavigationCont
         picker.isNavigationBarHidden = false
         self.dismiss(animated: true, completion: nil)
     }
+    
+    private func showAlert(withTitle title: String, message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alertController, animated: true)
+    }
+    
+    
+    func processImage(_ image: UIImage) {
+
+        let vegfruit = VegFruit()
+        let size = CGSize(width: 250, height: 250)
+
+        guard let buffer = image.resize(to: size)?.pixelBuffer()
+            else {
+            fatalError("Scaling or converting to pixel buffer failed!")
+        }
+
+        
+        guard let result = try? self.vgg.prediction(image: buffer)
+            else {
+            fatalError("VGG feature extraction failed!")
+        }
+        print(result.output.shape)
+        print(MLMultiArray.toDoubleArray(result.output))
+        guard let pred = try? vegfruit.prediction(input: VegFruitInput(features: result.output))
+            else {
+            fatalError("VGG feature extraction failed!")
+        }
+        
+        let probs = MLMultiArray.toDoubleArray(pred.output)
+        print(probs)
+        let (index, val) = argmax(probs)
+        
+        let converted = String(format: "%.2f", val*100)
+
+        self.percentage.text = "\(fruitNames[index]) - \(converted) %"
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    
 }
 
