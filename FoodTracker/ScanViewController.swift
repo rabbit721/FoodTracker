@@ -9,6 +9,7 @@
 import SwiftUI
 import UIKit
 import Vision
+
 import CoreML
 
 
@@ -20,14 +21,14 @@ class ScanViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     
 
     @IBOutlet weak var btnChooseImage: UIButton!
-    
+
     var imagePicker = UIImagePickerController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.imgProfile.layer.borderWidth = 0
-        
+
     }
     
     override func viewDidLayoutSubviews() {
@@ -39,7 +40,8 @@ class ScanViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         self.btnChooseImage.layer.cornerRadius = 5
     }
     
-    @IBAction func btnChooseImgClick(_ sender: UIButton) {
+    @IBAction func btnChooseImageOnClick(_ sender: UIButton) {
+        
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Take Photo", style: .default, handler: { _ in
             self.openCamera()
@@ -62,8 +64,9 @@ class ScanViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         }
         
         self.present(alert, animated: true, completion: nil)
+        
     }
-    
+
     //MARK: - Open the camera
     func openCamera(){
         if(UIImagePickerController .isSourceTypeAvailable(UIImagePickerController.SourceType.camera)){
@@ -90,10 +93,6 @@ class ScanViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         self.present(imagePicker, animated: true, completion: nil)
     }
 
-
-//MARK: - UIImagePickerControllerDelegate
-
-
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         /*
          Get the image from the info dictionary.
@@ -102,6 +101,7 @@ class ScanViewController: UIViewController, UIImagePickerControllerDelegate, UIN
          */
         if let editedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage{
             self.imgProfile.image = editedImage
+
         }
         
         //Dismiss the UIImagePicker after selection
@@ -112,14 +112,13 @@ class ScanViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         picker.isNavigationBarHidden = false
         self.dismiss(animated: true, completion: nil)
     }
+
     
     private func showAlert(withTitle title: String, message: String) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "OK", style: .default))
         present(alertController, animated: true)
     }
-    
-
     
 }
 

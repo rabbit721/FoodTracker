@@ -122,6 +122,7 @@
             </objects>
             <point key="canvasLocation" x="1808.6956521739132" y="-620.08928571428567"/>
         </scene>
+
         <!--My Fridge-->
         <scene sceneID="0O1-pI-Om0">
             <objects>
@@ -305,6 +306,7 @@
                         <outlet property="itemMonth" destination="vwe-Gc-ahH" id="1qq-kB-dM8"/>
                         <outlet property="itemName" destination="6fl-3i-Fsv" id="BDh-i3-H9m"/>
                         <outlet property="itemYear" destination="rll-7F-HCJ" id="Z6s-NE-2s9"/>
+
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mrg-1F-pf4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -331,6 +333,8 @@
         </scene>
     </scenes>
     <resources>
+
         <image name="fruit_placeholder" width="169" height="120"/>
+
     </resources>
 </document>
