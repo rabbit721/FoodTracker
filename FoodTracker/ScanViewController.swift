@@ -10,48 +10,25 @@ import SwiftUI
 import UIKit
 import Vision
 
-class ScanViewController: UIViewController{
+import CoreML
+
+
+
+class ScanViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+    
     
     @IBOutlet weak var imgProfile: UIImageView!
-
     
+
     @IBOutlet weak var btnChooseImage: UIButton!
-    
-    let barcodeRequest = VNDetectBarcodesRequest(completionHandler: { request, error in
 
-        guard let results = request.results else { return }
-
-        // Loopm through the found results
-        for result in results {
-            
-            // Cast the result to a barcode-observation
-            
-            if let barcode = result as? VNBarcodeObservation {
-                
-                // Print barcode-values
-                print("Symbology: \(barcode.symbology.rawValue)")
-                if let payload = barcode.payloadStringValue {
-                    print("payload is \(payload)")
-                }
-                //currently useless
-                /*if let desc = barcode.barcodeDescriptor as? CIQRCodeDescriptor {
-                    let content = String(data: desc.errorCorrectedPayload, encoding: .utf8)
-                    
-                    // FIXME: This currently returns nil. I did not find any docs on how to encode the data properly so far.
-                    print("Payload: \(String(describing: content))")
-                    print("Error-Correction-Level: \(desc.errorCorrectionLevel)")
-                    print("Symbol-Version: \(desc.symbolVersion)")
-                }*/
-            }
-        }
-    })
-    
     var imagePicker = UIImagePickerController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.imgProfile.layer.borderWidth = 0
+
     }
     
     override func viewDidLayoutSubviews() {
@@ -89,7 +66,7 @@ class ScanViewController: UIViewController{
         self.present(alert, animated: true, completion: nil)
         
     }
-    
+
     //MARK: - Open the camera
     func openCamera(){
         if(UIImagePickerController .isSourceTypeAvailable(UIImagePickerController.SourceType.camera)){
@@ -115,11 +92,7 @@ class ScanViewController: UIViewController{
         imagePicker.delegate = self
         self.present(imagePicker, animated: true, completion: nil)
     }
-}
 
-//MARK: - UIImagePickerControllerDelegate
-
-extension ScanViewController:  UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         /*
          Get the image from the info dictionary.
@@ -128,13 +101,7 @@ extension ScanViewController:  UIImagePickerControllerDelegate, UINavigationCont
          */
         if let editedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage{
             self.imgProfile.image = editedImage
-            guard let image = editedImage.cgImage else { return }
-            let handler = VNImageRequestHandler(cgImage: image, options: [:])
 
-            // Perform the barcode-request. This will call the completion-handler of the barcode-request.
-            guard let _ = try? handler.perform([barcodeRequest]) else {
-                return print("Could not perform barcode-request!")
-            }
         }
         
         //Dismiss the UIImagePicker after selection
@@ -145,5 +112,13 @@ extension ScanViewController:  UIImagePickerControllerDelegate, UINavigationCont
         picker.isNavigationBarHidden = false
         self.dismiss(animated: true, completion: nil)
     }
+
+    
+    private func showAlert(withTitle title: String, message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alertController, animated: true)
+    }
+    
 }
 
