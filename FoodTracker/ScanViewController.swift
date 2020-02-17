@@ -9,21 +9,35 @@
 import SwiftUI
 import UIKit
 import Vision
-
 import CoreML
-
 
 
 class ScanViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     
-    
     @IBOutlet weak var imgProfile: UIImageView!
-    
+    @IBOutlet weak var percentage: UITextView!
 
+    
+    
+    var productCatalog = ProductCatalog()
+    let fruitNames = ["acerolas", "apples", "apricots", "avocados", "bananas", "blackberries", "blueberries", "cantaloupes", "cherries", "coconuts", "figs", "grapefruits", "grapes", "guava", "honneydew_melon", "kiwifruit", "lemons", "limes", "mangos", "nectarine", "olives", "onion", "oranges", "passionfruit", "peaches", "pears", "pineapples", "plums", "pomegranates", "potato", "raspberries", "strawberries", "tomatoes", "watermelons"]
+    var vgg = VGGNorm()
+    
+    
+    func showInfo(for payload: String) {
+        if let product = productCatalog.item(forKey: payload) {
+            print(payload)
+            showAlert(withTitle: product.name ?? "No product name provided", message: payload)
+        } else {
+            showAlert(withTitle: "No item found for this payload", message: "")
+        }
+    }
+    
     @IBOutlet weak var btnChooseImage: UIButton!
 
+
     var imagePicker = UIImagePickerController()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -93,6 +107,7 @@ class ScanViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         self.present(imagePicker, animated: true, completion: nil)
     }
 
+  
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         /*
          Get the image from the info dictionary.
@@ -101,6 +116,8 @@ class ScanViewController: UIViewController, UIImagePickerControllerDelegate, UIN
          */
         if let editedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage{
             self.imgProfile.image = editedImage
+
+            processImage(editedImage)
 
         }
         
@@ -118,6 +135,42 @@ class ScanViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "OK", style: .default))
         present(alertController, animated: true)
+    }
+    
+    
+    func processImage(_ image: UIImage) {
+
+        let vegfruit = VegFruit()
+        let size = CGSize(width: 250, height: 250)
+
+        guard let buffer = image.resize(to: size)?.pixelBuffer()
+            else {
+            fatalError("Scaling or converting to pixel buffer failed!")
+        }
+
+        
+        guard let result = try? self.vgg.prediction(image: buffer)
+            else {
+            fatalError("VGG feature extraction failed!")
+        }
+        print(result.output.shape)
+        print(MLMultiArray.toDoubleArray(result.output))
+        guard let pred = try? vegfruit.prediction(input: VegFruitInput(features: result.output))
+            else {
+            fatalError("VGG feature extraction failed!")
+        }
+        
+        let probs = MLMultiArray.toDoubleArray(pred.output)
+        print(probs)
+        let (index, val) = argmax(probs)
+        
+        let converted = String(format: "%.2f", val*100)
+
+        self.percentage.text = "\(fruitNames[index]) - \(converted) %"
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
     }
     
 }

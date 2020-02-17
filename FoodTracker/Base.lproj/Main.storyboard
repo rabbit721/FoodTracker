@@ -102,6 +102,14 @@
                                     <constraint firstAttribute="width" constant="240" id="oSw-jZ-CUi"/>
                                 </constraints>
                             </imageView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Food Type" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="y0i-iV-BMT">
+                                <rect key="frame" x="137" y="512" width="141" height="33"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <color key="textColor" systemColor="labelColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -114,8 +122,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="JOg-9S-LHL"/>
                     <connections>
-                        <outlet property="btnChooseImage" destination="MWe-a5-Edb" id="x8p-pf-Z0E"/>
-                        <outlet property="imgProfile" destination="NDR-83-cBA" id="CyG-Ji-lho"/>
+                        <outlet property="btnChooseImage" destination="VQl-ID-C23" id="gQM-fS-NdB"/>
+                        <outlet property="imgProfile" destination="1u0-5g-WWS" id="PwS-y4-Ify"/>
+                        <outlet property="percentage" destination="y0i-iV-BMT" id="5Wv-pi-4nE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D4n-K2-q9S" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
