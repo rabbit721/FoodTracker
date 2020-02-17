@@ -15,7 +15,6 @@
 		4200E1E323F7913000208C79 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4200E1E123F7913000208C79 /* LaunchScreen.storyboard */; };
 		4200E1EB23F795FB00208C79 /* MainPageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4200E1EA23F795FB00208C79 /* MainPageController.swift */; };
 		4200E1ED23F7981600208C79 /* ScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4200E1EC23F7981600208C79 /* ScanViewController.swift */; };
-		4200E1EF23F79E7500208C79 /* FridgeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4200E1EE23F79E7500208C79 /* FridgeViewController.swift */; };
 		4250B98923F7C8C100427459 /* ProductCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4250B98823F7C8C100427459 /* ProductCatalog.swift */; };
 		4250B99123F7CD8300427459 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4250B99023F7CD8300427459 /* Product.swift */; };
 		427D302423F8B28A00605F4D /* MLMultiArray+Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 427D302323F8B28A00605F4D /* MLMultiArray+Utils.swift */; };
@@ -24,6 +23,9 @@
 		42DD871023F87EDD00F2F976 /* UIImage+PixelBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42DD870F23F87EDD00F2F976 /* UIImage+PixelBuffer.swift */; };
 		42DD871B23F8AC2500F2F976 /* VGG16.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 42DD871A23F8AC2500F2F976 /* VGG16.mlmodel */; };
 		42DD871D23F8ACD000F2F976 /* VegFruit.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 42DD871C23F8ACD000F2F976 /* VegFruit.mlmodel */; };
+		C188A8D323F856E2005CED03 /* FridgeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C188A8D223F856E2005CED03 /* FridgeViewController.swift */; };
+		C1EDB21823F880200063D4FC /* itemDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1EDB21723F880200063D4FC /* itemDetailViewController.swift */; };
+
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,7 +39,6 @@
 		4200E1E423F7913000208C79 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4200E1EA23F795FB00208C79 /* MainPageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageController.swift; sourceTree = "<group>"; };
 		4200E1EC23F7981600208C79 /* ScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanViewController.swift; sourceTree = "<group>"; };
-		4200E1EE23F79E7500208C79 /* FridgeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FridgeViewController.swift; sourceTree = "<group>"; };
 		4250B98823F7C8C100427459 /* ProductCatalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCatalog.swift; sourceTree = "<group>"; };
 		4250B99023F7CD8300427459 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		427D302323F8B28A00605F4D /* MLMultiArray+Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MLMultiArray+Utils.swift"; sourceTree = "<group>"; };
@@ -46,6 +47,8 @@
 		42DD870F23F87EDD00F2F976 /* UIImage+PixelBuffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+PixelBuffer.swift"; sourceTree = "<group>"; };
 		42DD871A23F8AC2500F2F976 /* VGG16.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = VGG16.mlmodel; sourceTree = "<group>"; };
 		42DD871C23F8ACD000F2F976 /* VegFruit.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = VegFruit.mlmodel; sourceTree = "<group>"; };
+		C188A8D223F856E2005CED03 /* FridgeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FridgeViewController.swift; sourceTree = "<group>"; };
+		C1EDB21723F880200063D4FC /* itemDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = itemDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,7 +90,8 @@
 				4200E1D823F7912C00208C79 /* SceneDelegate.swift */,
 				4200E1DA23F7912C00208C79 /* ViewController.swift */,
 				4200E1DC23F7912C00208C79 /* Main.storyboard */,
-				4200E1EE23F79E7500208C79 /* FridgeViewController.swift */,
+				C1EDB21723F880200063D4FC /* itemDetailViewController.swift */,
+				C188A8D223F856E2005CED03 /* FridgeViewController.swift */,
 				4200E1EA23F795FB00208C79 /* MainPageController.swift */,
 				4200E1EC23F7981600208C79 /* ScanViewController.swift */,
 				42DD870F23F87EDD00F2F976 /* UIImage+PixelBuffer.swift */,
@@ -179,12 +183,13 @@
 				4250B98923F7C8C100427459 /* ProductCatalog.swift in Sources */,
 				4200E1EB23F795FB00208C79 /* MainPageController.swift in Sources */,
 				4200E1ED23F7981600208C79 /* ScanViewController.swift in Sources */,
+				C1EDB21823F880200063D4FC /* itemDetailViewController.swift in Sources */,
 				4200E1D723F7912C00208C79 /* AppDelegate.swift in Sources */,
 				42CDC98D23F8D7E7002E9085 /* MathUtil.swift in Sources */,
 				42DD871B23F8AC2500F2F976 /* VGG16.mlmodel in Sources */,
 				4200E1D923F7912C00208C79 /* SceneDelegate.swift in Sources */,
 				427D302423F8B28A00605F4D /* MLMultiArray+Utils.swift in Sources */,
-				4200E1EF23F79E7500208C79 /* FridgeViewController.swift in Sources */,
+				C188A8D323F856E2005CED03 /* FridgeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

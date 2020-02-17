@@ -16,8 +16,8 @@ class ScanViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     
     @IBOutlet weak var imgProfile: UIImageView!
     @IBOutlet weak var percentage: UITextView!
+
     
-    @IBOutlet weak var btnChooseImage: UIButton!
     
     var productCatalog = ProductCatalog()
     let fruitNames = ["acerolas", "apples", "apricots", "avocados", "bananas", "blackberries", "blueberries", "cantaloupes", "cherries", "coconuts", "figs", "grapefruits", "grapes", "guava", "honneydew_melon", "kiwifruit", "lemons", "limes", "mangos", "nectarine", "olives", "onion", "oranges", "passionfruit", "peaches", "pears", "pineapples", "plums", "pomegranates", "potato", "raspberries", "strawberries", "tomatoes", "watermelons"]
@@ -33,51 +33,16 @@ class ScanViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         }
     }
     
+    @IBOutlet weak var btnChooseImage: UIButton!
+
+
     var imagePicker = UIImagePickerController()
-    /*
-    lazy var barcodeRequest = VNDetectBarcodesRequest(completionHandler: { request, error in
 
-        guard let results = request.results else { return }
-
-        // Loopm through the found results
-        if let bestResult = request.results?.first as? VNBarcodeObservation,
-            let payload = bestResult.payloadStringValue {
-            self.showInfo(for: payload)
-            print(payload)
-        } else {
-            self.showAlert(withTitle: "Unable to extract results",
-                           message: "Cannot extract barcode information from data.")
-        }
-        
-        for result in results {
-            
-            // Cast the result to a barcode-observation
-            
-            if let barcode = result as? VNBarcodeObservation {
-                
-                // Print barcode-values
-                print("Symbology: \(barcode.symbology.rawValue)")
-                if let payload = barcode.payloadStringValue {
-                    print("payload is \(payload)")
-                }
-                //currently useless
-                /*if let desc = barcode.barcodeDescriptor as? CIQRCodeDescriptor {
-                    let content = String(data: desc.errorCorrectedPayload, encoding: .utf8)
-                    
-                    // FIXME: This currently returns nil. I did not find any docs on how to encode the data properly so far.
-                    print("Payload: \(String(describing: content))")
-                    print("Error-Correction-Level: \(desc.errorCorrectionLevel)")
-                    print("Symbol-Version: \(desc.symbolVersion)")
-                }*/
-            }
-        }
-    })
-    */
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.imgProfile.layer.borderWidth = 0
-        
+
     }
     
     override func viewDidLayoutSubviews() {
@@ -115,7 +80,7 @@ class ScanViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         self.present(alert, animated: true, completion: nil)
         
     }
-    
+
     //MARK: - Open the camera
     func openCamera(){
         if(UIImagePickerController .isSourceTypeAvailable(UIImagePickerController.SourceType.camera)){
@@ -142,10 +107,7 @@ class ScanViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         self.present(imagePicker, animated: true, completion: nil)
     }
 
-
-//MARK: - UIImagePickerControllerDelegate
-
-
+  
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         /*
          Get the image from the info dictionary.
@@ -154,7 +116,9 @@ class ScanViewController: UIViewController, UIImagePickerControllerDelegate, UIN
          */
         if let editedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage{
             self.imgProfile.image = editedImage
+
             processImage(editedImage)
+
         }
         
         //Dismiss the UIImagePicker after selection
@@ -165,6 +129,7 @@ class ScanViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         picker.isNavigationBarHidden = false
         self.dismiss(animated: true, completion: nil)
     }
+
     
     private func showAlert(withTitle title: String, message: String) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
