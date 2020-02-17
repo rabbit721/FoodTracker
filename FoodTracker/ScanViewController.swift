@@ -17,10 +17,11 @@ class ScanViewController: UIViewController, UIImagePickerControllerDelegate, UIN
     @IBOutlet weak var imgProfile: UIImageView!
     @IBOutlet weak var percentage: UITextView!
 
-    
+    @IBOutlet weak var btnChooseImage: UIButton!
     
     var productCatalog = ProductCatalog()
     let fruitNames = ["acerolas", "apples", "apricots", "avocados", "bananas", "blackberries", "blueberries", "cantaloupes", "cherries", "coconuts", "figs", "grapefruits", "grapes", "guava", "honneydew_melon", "kiwifruit", "lemons", "limes", "mangos", "nectarine", "olives", "onion", "oranges", "passionfruit", "peaches", "pears", "pineapples", "plums", "pomegranates", "potato", "raspberries", "strawberries", "tomatoes", "watermelons"]
+    
     var vgg = VGGNorm()
     
     
@@ -33,9 +34,7 @@ class ScanViewController: UIViewController, UIImagePickerControllerDelegate, UIN
         }
     }
     
-    @IBOutlet weak var btnChooseImage: UIButton!
-
-
+    
     var imagePicker = UIImagePickerController()
 
     override func viewDidLoad() {

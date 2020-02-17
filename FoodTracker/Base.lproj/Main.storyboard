@@ -122,8 +122,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="JOg-9S-LHL"/>
                     <connections>
-                        <outlet property="btnChooseImage" destination="VQl-ID-C23" id="gQM-fS-NdB"/>
-                        <outlet property="imgProfile" destination="1u0-5g-WWS" id="PwS-y4-Ify"/>
+                        <outlet property="btnChooseImage" destination="MWe-a5-Edb" id="mdM-dx-ryd"/>
+                        <outlet property="imgProfile" destination="NDR-83-cBA" id="p98-Ry-PTy"/>
                         <outlet property="percentage" destination="y0i-iV-BMT" id="5Wv-pi-4nE"/>
                     </connections>
                 </viewController>
